@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
-import { assets, country } from "../assets/assets";
+import { assets, city } from "../assets/assets";
 
 const HotelReg = () => {
     const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
@@ -9,13 +9,13 @@ const HotelReg = () => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [contact, setContact] = useState("");
-    const [country, setcountry] = useState("");
+    const [city, setcity] = useState("");
 
     const onSubmitHandler = async (event) => {
         try {
             event.preventDefault();
 
-            const { data } = await axios.post(`/api/hotels/`, { name, contact, address, country }, { headers: { Authorization: `Bearer ₹{await getToken()}` } });
+            const { data } = await axios.post(`/api/hotels/`, { name, contact, address, city }, { headers: { Authorization: `Bearer ₹{await getToken()}` } });
 
             if (data.success) {
                 toast.success(data.message);
@@ -52,13 +52,13 @@ const HotelReg = () => {
                         <textarea id="address" rows="2" onChange={(e) => setAddress(e.target.value)} value={address} placeholder="Type here" className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light resize-none" type="text" required />
                     </div>
 
-                    {/* Drop Down ountry */}
+                    {/* Drop Down city */}
                     <div className="w-full mt-4 max-w-60 mr-auto">
-                        <label htmlFor="country" className="font-medium text-gray-500">Country</label>
-                        <select id="country" onChange={(e) => setcountry(e.target.value)} value={country} className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light" required>
-                            <option value="">Select Country</option>
-                            {country.map((country) => (
-                                <option key={country} value={country}>{country}</option>
+                        <label htmlFor="city" className="font-medium text-gray-500">city</label>
+                        <select id="city" onChange={(e) => setcity(e.target.value)} value={city} className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light" required>
+                            <option value="">Select City</option>
+                            {city.map((city) => (
+                                <option key={city} value={city}>{city}</option>
                             ))}
                         </select>
                     </div>
