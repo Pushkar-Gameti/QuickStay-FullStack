@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
-import { assets, city } from "../assets/assets";
+import { assets, cities  } from "../assets/assets";
 
 const HotelReg = () => {
     const { setShowHotelReg, axios, getToken, setIsOwner } = useAppContext();
@@ -15,7 +15,7 @@ const HotelReg = () => {
         try {
             event.preventDefault();
 
-            const { data } = await axios.post(`/api/hotels/`, { name, contact, address, city }, { headers: { Authorization: `Bearer ₹{await getToken()}` } });
+            const { data } = await axios.post(`/api/hotels/`, { name, contact, address, city }, { headers: { Authorization: `Bearer ${await getToken()}` } });
 
             if (data.success) {
                 toast.success(data.message);
@@ -57,7 +57,7 @@ const HotelReg = () => {
                         <label htmlFor="city" className="font-medium text-gray-500">city</label>
                         <select id="city" onChange={(e) => setcity(e.target.value)} value={city} className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light" required>
                             <option value="">Select City</option>
-                            {city.map((city) => (
+                            {cities.map((city) => (
                                 <option key={city} value={city}>{city}</option>
                             ))}
                         </select>
